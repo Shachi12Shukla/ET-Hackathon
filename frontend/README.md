@@ -1,16 +1,42 @@
-# React + Vite
+# ET Concierge (Frontend):
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend interface for the ET AI Concierge (Problem Statement 7). It provides a conversational AI interface to help users navigate the Economic Times ecosystem.
 
-Currently, two official plugins are available:
+## Features:
+Financial Passport: Dynamic sidebar that updates based on user chat.
+Rich Product Cards: AI recommendations displayed as visual cards.
+Responsive Layout: Collapsible sidebar for better focus.
+ET Branding: Themed with Economic Times colors and premium fonts (Playfair Display & Inter).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+React (Vite)
+Tailwind CSS v3
+Lucide React (Icons)
 
-## React Compiler
+## Setup Instructions:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites:
 
-## Expanding the ESLint configuration
+Node.js installed (v16+)
+Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### Navigate to the frontend folder:
+
+cd frontend
+
+#### Install dependencies:
+
+npm install
+
+#### Run the development server:
+
+npm run dev
+Open http://localhost:5173 in your browser.
+
+##  Project Structure:
+
+src/
+├── components/      # Reusable UI components (Sidebar, ChatWindow, Cards)
+├── App.jsx          # Main layout controller
+├── main.jsx         # Entry point
+└── index.css        # Tailwind directives and global styles
