@@ -36,10 +36,11 @@ Open http://localhost:5173 in your browser.
 ##  Project Structure:
 
 src/
-├── components/      # Reusable UI components (Sidebar, ChatWindow, Cards)
 
-├── App.jsx          # Main layout controller
+  ├── components/      # Reusable UI components (Sidebar, ChatWindow, Cards)
 
-├── main.jsx         # Entry point
+  ├── App.jsx          # Main layout controller
 
-└── index.css        # Tailwind directives and global styles
+  ├── main.jsx         # Entry point
+
+  └── index.css        # Tailwind directives and global styles
