@@ -8,7 +8,7 @@ Rich Product Cards: AI recommendations displayed as visual cards.
 Responsive Layout: Collapsible sidebar for better focus.
 ET Branding: Themed with Economic Times colors and premium fonts (Playfair Display & Inter).
 
-## Tech Stack
+## Tech Stack:
 React (Vite)
 Tailwind CSS v3
 Lucide React (Icons)
@@ -37,6 +37,9 @@ Open http://localhost:5173 in your browser.
 
 src/
 ├── components/      # Reusable UI components (Sidebar, ChatWindow, Cards)
+
 ├── App.jsx          # Main layout controller
+
 ├── main.jsx         # Entry point
+
 └── index.css        # Tailwind directives and global styles
