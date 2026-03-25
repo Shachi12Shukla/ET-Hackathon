@@ -2,8 +2,7 @@ import { User, Briefcase, TrendingUp, ShieldCheck, PanelLeftClose } from 'lucide
 
 const Sidebar = ({ userProfile, isOpen, toggleSidebar }) => {
   return (
-    <div className="flex flex-col h-full p-6">
-
+    <div className="flex flex-col h-full p-6 bg-et-dark">
       <div className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-serif font-bold text-white">
@@ -60,6 +59,7 @@ const Sidebar = ({ userProfile, isOpen, toggleSidebar }) => {
           </div>
         )}
       </div>
+
       <div className="mt-auto text-center pt-4">
         <p className="text-xs text-gray-600 font-sans">Powered by ET AI Hackathon</p>
       </div>

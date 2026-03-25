@@ -19,7 +19,7 @@ const InputBar = ({ onSend }) => {
           <button 
             key={sug} 
             onClick={() => onSend(sug)}
-            className="bg-white border border-gray-300 text-gray-600 text-xs px-4 py-1.5 rounded-full hover:border-et-brand hover:text-et-brand transition-colors shadow-sm"
+            className="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-600 dark:text-gray-300 text-xs px-4 py-1.5 rounded-full hover:border-et-brand hover:text-et-brand transition-colors shadow-sm"
           >
             <Sparkles size={12} className="inline mr-1 text-et-brand" />
             {sug}
@@ -27,14 +27,14 @@ const InputBar = ({ onSend }) => {
         ))}
       </div>
 
-      <div className="flex items-center gap-3 border-2 border-gray-200 rounded-full px-6 py-2 focus-within:border-et-brand transition-colors bg-white shadow-sm">
+      <div className="flex items-center gap-3 border-2 border-gray-300 dark:border-neutral-700 rounded-full px-6 py-2 focus-within:border-et-brand transition-all duration-200 bg-white dark:bg-neutral-800 shadow-lg hover:shadow-xl">
         <input 
           type="text" 
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Ask me anything about finance..."
-          className="flex-1 outline-none text-sm bg-transparent text-et-dark placeholder-gray-400"
+          className="flex-1 outline-none text-sm bg-transparent text-et-dark dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <button 
           onClick={handleSend} 
