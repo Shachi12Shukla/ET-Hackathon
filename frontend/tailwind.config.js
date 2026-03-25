@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -13,7 +14,6 @@ export default {
         'et-blue': '#0066CC',
       },
       fontFamily: {
-        // Use quotes for font names with spaces
         'serif': ['"Playfair Display"', 'Georgia', 'serif'], 
         'sans': ['"Inter"', 'Arial', 'sans-serif'],
       }
