@@ -7,10 +7,10 @@ const MessageBubble = ({ message }) => {
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} w-full`}>
       <div className={`max-w-xl ${isUser ? 'order-1' : 'order-2'}`}>
         
-        <div className={`p-4 rounded-2xl shadow-sm ${
+        <div className={`p-4 rounded-2xl shadow-lg border transition-colors duration-300 ${
             isUser 
-              ? 'bg-et-brand text-white rounded-br-none' 
-              : 'bg-white border border-gray-100 text-et-dark rounded-bl-none'
+              ? 'bg-et-brand text-white rounded-br-none border-red-600' 
+              : 'bg-white dark:bg-neutral-800 text-et-dark dark:text-white rounded-bl-none border-gray-100 dark:border-neutral-700'
         }`}>
           <p className="text-sm leading-relaxed font-sans">{message.content}</p>
         </div>
