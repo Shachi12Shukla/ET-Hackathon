@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userProfileSchema = new mongoose.Schema({
   userId: {
@@ -7,7 +7,7 @@ const userProfileSchema = new mongoose.Schema({
     unique: true,
   },
 
-  //PERSONAL INFO
+  // PERSONAL INFO
   personal: {
     name: {
       type: String,
@@ -20,7 +20,7 @@ const userProfileSchema = new mongoose.Schema({
     },
   },
 
-  //ET SERVICES INTEREST
+  // ET SERVICES INTEREST
   preferences: {
     interestedServices: [
       {
@@ -38,24 +38,22 @@ const userProfileSchema = new mongoose.Schema({
     ],
   },
 
-  //FINANCIAL PROFILE
+  // FINANCIAL PROFILE
   financial: {
     income: {
-      type: String, 
+      type: String,
       enum: ["<20k", "20k-50k", "50k-1L", "1L+"],
     },
     goals: [String],
   },
 
-  //INVESTMENTS
+  // INVESTMENTS
   investments: {
     interestedInInvesting: Boolean,
-
     experienceLevel: {
       type: String,
       enum: ["beginner", "intermediate", "advanced"],
     },
-
     assets: {
       mutualFunds: { type: Boolean, default: false },
       stocks: { type: Boolean, default: false },
@@ -64,19 +62,19 @@ const userProfileSchema = new mongoose.Schema({
     },
   },
 
-  //LIABILITIES
+  // LIABILITIES
   liabilities: {
     hasLoans: { type: Boolean, default: false },
     emiAmount: { type: Number, default: 0 },
   },
 
-  //INSURANCE
+  // INSURANCE
   insurance: {
     hasHealthInsurance: { type: Boolean, default: false },
     hasLifeInsurance: { type: Boolean, default: false },
   },
 
-  //BEHAVIOR
+  // BEHAVIOR
   behavior: {
     spending: {
       type: String,
@@ -88,7 +86,7 @@ const userProfileSchema = new mongoose.Schema({
     },
   },
 
-  //CREDIT PROFILE
+  // CREDIT PROFILE
   credit: {
     hasCreditCard: { type: Boolean, default: false },
     creditScore: {
@@ -98,30 +96,27 @@ const userProfileSchema = new mongoose.Schema({
     },
   },
 
-  //TAX/COMPLIANCE
+  // TAX / COMPLIANCE
   compliance: {
     filesITR: { type: Boolean, default: false },
   },
 
-  //AI INSIGHTS
+  // AI INSIGHTS
   insights: {
     riskProfile: {
       type: String,
       enum: ["low", "moderate", "high"],
     },
-
     financialHealthScore: {
       type: Number,
       min: 0,
       max: 100,
     },
-
     gaps: [String],
-
     recommendations: [String],
   },
 
-  //TIMESTAMPS
+  // TIMESTAMPS
   createdAt: {
     type: Date,
     default: Date.now,
@@ -133,10 +128,7 @@ const userProfileSchema = new mongoose.Schema({
   },
 });
 
-// Auto-update timestamp
-userProfileSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
-});
 
-module.exports = mongoose.model("UserProfile", userProfileSchema);
+
+const UserProfile = mongoose.model("UserProfile", userProfileSchema);
+export default UserProfile;
