@@ -98,7 +98,7 @@ const userProfileSchema = new mongoose.Schema({
     },
   },
 
-  //TAX / COMPLIANCE
+  //TAX/COMPLIANCE
   compliance: {
     filesITR: { type: Boolean, default: false },
   },
