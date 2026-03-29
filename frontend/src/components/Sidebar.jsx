@@ -26,7 +26,7 @@ const Sidebar = ({ userProfile, isOpen, toggleSidebar }) => {
           </div>
           <div>
             <h3 className="font-semibold text-lg text-white font-sans">
-              {userProfile?.name || "Guest User"}
+              {userProfile?.personal?.name || "Guest User"}
             </h3>
             <p className="text-xs text-gray-400 flex items-center gap-1 font-sans">
               <span className={`w-2 h-2 rounded-full ${userProfile ? 'bg-green-500' : 'bg-yellow-500'}`}></span>

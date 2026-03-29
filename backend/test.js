@@ -12,14 +12,14 @@ async function runTest() {
   while (true) {
     const res = await handleAI(profile, message);
 
-    console.log("\n🤖 AI:", res.reply || res);
+    console.log("\n AI:", res.reply || res);
 
     // update profile
     profile = res.profile;
 
     // if onboarding complete → break
     if (res.stage === "completed") {
-      console.log("\n🎯 FINAL OUTPUT:\n", JSON.stringify(res, null, 2));
+      console.log("\n FINAL OUTPUT:\n", JSON.stringify(res, null, 2));
       break;
     }
 

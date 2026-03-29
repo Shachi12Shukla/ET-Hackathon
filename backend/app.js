@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import UserProfile from './models/UserProfile.js';
+import chatRoutes from './routes/ChatRoutes.js'
 const app = express();
 
 // Middleware
@@ -31,4 +32,5 @@ app.post("/api/profile", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.use("/api/chat",chatRoutes);
 export default app;

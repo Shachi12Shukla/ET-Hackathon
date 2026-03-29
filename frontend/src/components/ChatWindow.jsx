@@ -6,22 +6,102 @@ import { PanelLeftOpen, Sparkles, Sun, Moon } from 'lucide-react';
 const ChatWindow = ({ messages, setMessages, setUserProfile, isSidebarOpen, toggleSidebar, theme, toggleTheme }) => {
   const scrollRef = useRef(null);
 
+  const [userId, setUserId] = useState(null);
+
+const hasInitialized = useRef(false);
+
+useEffect(() => {
+  if (hasInitialized.current) return; // PREVENT DOUBLE CALL
+  hasInitialized.current = true;
+
+  const initChat = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: ""
+        })
+      });
+
+      const data = await res.json();
+
+      console.log("NEW USER ID:", data.userId);
+
+      setUserId(data.userId);
+
+      setMessages([
+        { role: "assistant", content: data.reply }
+      ]);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  initChat();
+}, []);
+
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = (text) => {
-    const newUserMsg = { role: 'user', content: text };
-    setMessages(prev => [...prev, newUserMsg]);
+ const handleSend = async (text) => {
+  if (!text.trim()) return;
 
-    setTimeout(() => {
-      const mockResponse = getMockResponse(text);
-      setMessages(prev => [...prev, mockResponse.msg]);
-      if(mockResponse.profile) {
-        setUserProfile(prev => ({ ...prev, ...mockResponse.profile }));
-      }
-    }, 1000);
-  };
+  // STOP if userId not ready
+  if (!userId) {
+    console.log("userId missing");
+    return;
+  }
+
+  const newUserMsg = { role: "user", content: text };
+  setMessages(prev => [...prev, newUserMsg]);
+
+  try {
+    console.log("Sending userId:", userId); // DEBUG
+
+    const res = await fetch("http://localhost:5000/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,   // ✅ IMPORTANT
+        message: text,
+      }),
+    });
+
+    const data = await res.json();
+
+    setMessages(prev => [
+      ...prev,
+      { role: "assistant", content: data.reply }
+    ]);
+
+    if (data.profile) {
+      setUserProfile(data.profile);
+    }
+
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+  // const handleSend = (text) => {
+  //   const newUserMsg = { role: 'user', content: text };
+  //   setMessages(prev => [...prev, newUserMsg]);
+
+  //   setTimeout(() => {
+  //     const mockResponse = getMockResponse(text);
+  //     setMessages(prev => [...prev, mockResponse.msg]);
+  //     if(mockResponse.profile) {
+  //       setUserProfile(prev => ({ ...prev, ...mockResponse.profile }));
+  //     }
+  //   }, 1000);
+  // };
 
   return (
     <div className="relative flex flex-col h-full bg-white dark:bg-neutral-900 shadow-xl transition-colors duration-300">
@@ -83,37 +163,37 @@ const ChatWindow = ({ messages, setMessages, setUserProfile, isSidebarOpen, togg
   );
 };
 
-const getMockResponse = (text) => {
-  let msg = { role: 'assistant', content: "I'm processing your request..." };
-  let profile = null;
+// const getMockResponse = (text) => {
+//   let msg = { role: 'assistant', content: "I'm processing your request..." };
+//   let profile = null;
 
-  if (text.includes("tax")) {
-    msg = { 
-      role: 'assistant', 
-      content: "Great choice. Tax planning is essential. I found a highly rated article and a tool for you.",
-      cardData: {
-        type: "ET Prime",
-        title: "Ultimate Guide to ELSS Funds for 2024",
-        description: "Save tax while building long term wealth.",
-        image: "https://img.etimg.com/photo/98196925.cms"
-      }
-    };
-    profile = { interests: "Tax Saving", riskAppetite: "Moderate", status: "Tax Planner" };
-  } else if (text.includes("IPO")) {
-    msg = { 
-      role: 'assistant', 
-      content: "IPOs are buzzing right now! Here is the latest analysis.",
-      cardData: {
-        type: "Live Market",
-        title: "Top 3 IPOs to Watch This Week",
-        description: "Analysis of upcoming public issues and grey market premiums.",
-        image: "https://img.etimg.com/photo/98196925.cms"
-      }
-    };
-    profile = { interests: "IPOs & New Listings", riskAppetite: "High", status: "Active Trader" };
-  }
+//   if (text.includes("tax")) {
+//     msg = { 
+//       role: 'assistant', 
+//       content: "Great choice. Tax planning is essential. I found a highly rated article and a tool for you.",
+//       cardData: {
+//         type: "ET Prime",
+//         title: "Ultimate Guide to ELSS Funds for 2024",
+//         description: "Save tax while building long term wealth.",
+//         image: "https://img.etimg.com/photo/98196925.cms"
+//       }
+//     };
+//     profile = { interests: "Tax Saving", riskAppetite: "Moderate", status: "Tax Planner" };
+//   } else if (text.includes("IPO")) {
+//     msg = { 
+//       role: 'assistant', 
+//       content: "IPOs are buzzing right now! Here is the latest analysis.",
+//       cardData: {
+//         type: "Live Market",
+//         title: "Top 3 IPOs to Watch This Week",
+//         description: "Analysis of upcoming public issues and grey market premiums.",
+//         image: "https://img.etimg.com/photo/98196925.cms"
+//       }
+//     };
+//     profile = { interests: "IPOs & New Listings", riskAppetite: "High", status: "Active Trader" };
+//   }
 
-  return { msg, profile };
-};
+//   return { msg, profile };
+// };
 
 export default ChatWindow;

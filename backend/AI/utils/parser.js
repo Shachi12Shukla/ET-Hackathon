@@ -8,6 +8,10 @@ export function safeParse(content) {
     return JSON.parse(cleaned);
   } catch (err) {
     console.log("LLM RAW OUTPUT:", content);
-    return { error: "Invalid JSON", raw: content };
+    return {
+      type: "question",
+      updatedProfile: {},
+      question: "Let’s continue — can you tell me more?"
+    }
   }
 }

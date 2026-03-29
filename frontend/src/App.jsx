@@ -4,12 +4,7 @@ import ChatWindow from './components/ChatWindow';
 
 function App() {
   const [userProfile, setUserProfile] = useState(null);
-  const [messages, setMessages] = useState([
-    { 
-      role: 'assistant', 
-      content: "Welcome to the ET Concierge. I can help you navigate the markets, plan your taxes, or find the right investment events. What's on your mind today?" 
-    }
-  ]);
+  const [messages, setMessages] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   
   const [theme, setTheme] = useState('light');

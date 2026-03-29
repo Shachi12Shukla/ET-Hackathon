@@ -1,17 +1,10 @@
 import mongoose from "mongoose";
 
 const userProfileSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-
   // PERSONAL INFO
   personal: {
     name: {
       type: String,
-      required: true,
     },
     age: {
       type: Number,
